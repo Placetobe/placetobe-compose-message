@@ -1,0 +1,67 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../placetobe-styles/placetobe-styles.html">
+<link rel="import" href="../placetobe-textarea-box/placetobe-textarea-box.html">
+<link rel="import" href="../placetobe-button/placetobe-button.html">
+<link rel="import" href="../placetobe-card/placetobe-card.html">
+
+<!--
+`placetobe-compose-message`
+Placetobe element for composing a message
+
+@demo demo/index.html 
+-->
+
+<dom-module id="placetobe-compose-message">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+  
+    <placetobe-card title="[[cardTitle]]" id="compose-message">
+      <article slot="main">
+        <placetobe-textarea-box value="{{messageString}}" max-rows="[[maxRows]]"></placetobe-textarea-box>
+      </article>
+      <placetobe-button
+        title="[[buttonTitle]]"
+        slot="footer"
+        disabled$="[[_emptyMessage]]"
+      ><span>[[buttonTitle]]</span>
+      </placetobe-button>
+    </placetobe-card>
+
+  </template>
+  <script>
+    Polymer({
+
+      is: 'placetobe-compose-message',
+
+      properties: {
+        messageString: {
+          type: String,
+          notify: true
+        },
+
+        cardTitle: {
+          type: String
+        },
+        buttonTitle: {
+          type: String
+        },
+        maxRows: {
+          type: Number
+        },
+
+        _emptyMessage: {
+          type: Boolean,
+          computed: '_computeEmpty(messageString)'
+        }
+      },
+      _computeEmpty: function(value) {
+        return (!value || value.length < 1);
+      },
+
+    });
+  </script>
+</dom-module>
