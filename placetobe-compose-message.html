@@ -17,11 +17,17 @@ Placetobe element for composing a message
       :host {
         display: block;
       }
+      placetobe-textarea-box {
+        --iron-autogrow-textarea-max-height: {
+          max-height: 100px;
+        }
+      }
+      
     </style>
   
     <placetobe-card title="[[cardTitle]]" id="compose-message">
       <article slot="main">
-        <placetobe-textarea-box value="{{messageString}}" max-rows="[[maxRows]]"></placetobe-textarea-box>
+        <placetobe-textarea-box name="[[messageLabel]]" placeholder="[[messagePlaceholder]]" value="{{messageString}}" max-rows="[[maxRows]]"></placetobe-textarea-box>
       </article>
       <placetobe-button
         title="[[buttonTitle]]"
@@ -38,19 +44,43 @@ Placetobe element for composing a message
       is: 'placetobe-compose-message',
 
       properties: {
+        /**
+         * Message (String) entered by user
+        */ 
         messageString: {
           type: String,
           notify: true
         },
-
+        /**
+         * String displayed at the top of the card
+        */ 
         cardTitle: {
           type: String
         },
+        /**
+         * String displayed in the button
+        */        
         buttonTitle: {
           type: String
         },
+        /**
+         * Maximum amount of rows to be displayed at a time. Scrollbar will appear if amount of total rows increases this value.
+         * Note: When users never hit `enter` (characterCode == 13) the textarea might grow bigger due to a bug.
+        */
         maxRows: {
           type: Number
+        },
+        /**
+         * Label on top of textfield reminder user what to write about
+        */
+        messageLabel: {
+          type: String          
+        },
+        /**
+         * Message to be displayed when user has not written anything yet
+        */
+        messagePlaceholder: {
+          type: String                    
         },
 
         _emptyMessage: {
