@@ -11,6 +11,7 @@
     "polymer": "Polymer/polymer#^1.4.0",
     "placetobe-textarea-box": "Placetobe/placetobe-textarea-box",
     "placetobe-button": "Placetobe/placetobe-button",
+    "placetobe-card": "Placetobe/placetobe-card",
     "placetobe-styles": "Placetobe/placetobe-styles",
     "caas-campaign-testimonials": "caaSElements/caas-campaign-testimonials"
   },
