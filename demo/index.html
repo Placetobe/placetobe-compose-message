@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>placetobe-compose-message demo</title>
+    <title>placetobe-create-testimonial-card demo</title>
 
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../placetobe-compose-message.html">
+    <link rel="import" href="../placetobe-create-testimonial-card.html">
     <link rel="import" href="../../caas-auth/caas-auth.html">
 
     <style is="custom-style" include="demo-pages-shared-styles">
@@ -22,7 +22,7 @@
     </style>
   </head>
     <div class="vertical-section-container centered">
-        <h3>Basic placetobe-compose-message demo</h3>
+        <h3>Basic placetobe-create-testimonial-card demo</h3>
       <demo-snippet>
 
         <template is="dom-bind" id="demo">
@@ -53,7 +53,7 @@
             user-id="{{userId}}"
           ></caas-auth>
 
-          <placetobe-compose-message
+          <placetobe-create-testimonial-card
             button-title="Stuur bericht"
             card-title="Stuur de ondernemer een bericht"
             max-rows="6"
@@ -68,7 +68,7 @@
             testimonials="{{testimonials}}"
             access-token="[[accessToken]]"
             motivational-message="Zet m op! Test!"
-          ></placetobe-compose-message>
+          ></placetobe-create-testimonial-card>
 
 
           <script>

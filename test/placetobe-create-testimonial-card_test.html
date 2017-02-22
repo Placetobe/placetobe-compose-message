@@ -4,25 +4,25 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>placetobe-compose-message test</title>
+    <title>placetobe-create-testimonial-card test</title>
 
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
 
-    <link rel="import" href="../placetobe-compose-message.html">
+    <link rel="import" href="../placetobe-create-testimonial-card.html">
   </head>
   <body>
     <test-fixture id="basic">
       <template>
-        <placetobe-compose-message></placetobe-compose-message>
+        <placetobe-create-testimonial-card></placetobe-create-testimonial-card>
       </template>
     </test-fixture>
 
     <script>
-      suite('placetobe-compose-message', function() {
+      suite('placetobe-create-testimonial-card', function() {
         test('instantiating the element works', function() {
           var element = fixture('basic');
-          assert.equal(element.is, 'placetobe-compose-message');
+          assert.equal(element.is, 'placetobe-create-testimonial-card');
         });
       });
     </script>

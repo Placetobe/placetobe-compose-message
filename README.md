@@ -1,4 +1,4 @@
-# \<placetobe-compose-message\>
+# \<placetobe-create-testimonial-card\>
 
 Placetobe element for composing a message
 

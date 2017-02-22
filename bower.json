@@ -1,7 +1,12 @@
 {
-  "name": "placetobe-compose-message",
-  "description": "Placetobe element for composing a message",
-  "main": "placetobe-compose-message.html",
+  "name": "placetobe-create-testimonial-card",
+  "description": "Placetobe element for creating a testimonial",
+  "main": "placetobe-create-testimonial-card.html",
+    "authors": [
+    "Sam Prinssen",
+    "Wouter Vroege"
+  ],
+  "homepage": "https://github.com/placetobe/placetobe-create-testimonial-card",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",
     "placetobe-textarea-box": "Placetobe/placetobe-textarea-box",

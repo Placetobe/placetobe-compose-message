@@ -6,13 +6,13 @@
 <link rel="import" href="../caas-campaign-testimonials/caas-campaign-testimonials.html">
 
 <!--
-`placetobe-compose-message`
-Placetobe element for composing a message
+`placetobe-create-testimonial-card`
+Placetobe element for creating a testimonial
 
 @demo demo/index.html 
 -->
 
-<dom-module id="placetobe-compose-message">
+<dom-module id="placetobe-create-testimonial-card">
   <template>
     <style>
       :host {
@@ -42,7 +42,7 @@ Placetobe element for composing a message
       on-campaign-testimonial-created="_handleMessageAdditionSuccessful"
     ></caas-campaign-testimonials>
 
-    <placetobe-card title="[[cardTitle]]" id="compose-message">
+    <placetobe-card title="[[cardTitle]]">
       <template is="dom-if" if="{{!_messageSent}}">
         <article slot="main">
           <placetobe-textarea-box name="[[messageLabel]]" placeholder="[[messagePlaceholder]]" value="{{messageString}}" max-rows="[[maxRows]]"></placetobe-textarea-box>
@@ -67,7 +67,7 @@ Placetobe element for composing a message
   <script>
     Polymer({
 
-      is: 'placetobe-compose-message',
+      is: 'placetobe-create-testimonial-card',
 
       properties: {
         /**
