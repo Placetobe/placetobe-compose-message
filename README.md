@@ -1,6 +1,6 @@
 # \<placetobe-create-testimonial-card\>
 
-Placetobe element for composing a message
+Placetobe element for creating a testimonial
 
 ## Install the Polymer-CLI
 
