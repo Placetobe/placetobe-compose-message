@@ -3,6 +3,7 @@
 <link rel="import" href="../placetobe-textarea-box/placetobe-textarea-box.html">
 <link rel="import" href="../placetobe-button/placetobe-button.html">
 <link rel="import" href="../placetobe-card/placetobe-card.html">
+<link rel="import" href="../caas-campaign-testimonials/caas-campaign-testimonials.html">
 
 <!--
 `placetobe-compose-message`
@@ -22,19 +23,44 @@ Placetobe element for composing a message
           max-height: 100px;
         }
       }
+      [hidden] {
+        display: none;
+      }
       
     </style>
-  
+
+    <caas-campaign-testimonials
+      id="testimonials"
+      campaign-id="[[campaignId]]"
+      investor-id="[[investorId]]"
+      invoice-number="[[invoiceNumber]]"
+      relation-to-entrepeneur="[[relationToEntrepeneur]]"
+      anonymous="false"
+      api-endpoint="[[apiEndpoint]]"
+      access-token="[[accessToken]]"
+      motivational-message="[[messageString]]"
+      on-campaign-testimonial-created="_handleMessageAdditionSuccessful"
+    ></caas-campaign-testimonials>
+
     <placetobe-card title="[[cardTitle]]" id="compose-message">
-      <article slot="main">
-        <placetobe-textarea-box name="[[messageLabel]]" placeholder="[[messagePlaceholder]]" value="{{messageString}}" max-rows="[[maxRows]]"></placetobe-textarea-box>
-      </article>
-      <placetobe-button
-        title="[[buttonTitle]]"
-        slot="footer"
-        disabled$="[[_emptyMessage]]"
-      ><span>[[buttonTitle]]</span>
-      </placetobe-button>
+      <template is="dom-if" if="{{!_messageSent}}">
+        <article slot="main">
+          <placetobe-textarea-box name="[[messageLabel]]" placeholder="[[messagePlaceholder]]" value="{{messageString}}" max-rows="[[maxRows]]"></placetobe-textarea-box>
+        </article>
+        <placetobe-button
+          title="[[buttonTitle]]"
+          slot="footer"
+          disabled$="[[_emptyMessage]]"
+          on-tap="addInvestorTestimonial"
+        ><span>[[buttonTitle]]</span>
+        </placetobe-button>
+      </template>
+      <template is="dom-if" if="{{_messageSent}}">
+        <article slot="main">
+          <p hidden$="{{!anonymous}}">Je bericht is op de pagina van de campagne te zien!</p>
+          <p hidden$="{{anonymous}}">Je bericht is alleen voor de ondernemer te zien</p>
+        </article>
+      </template>
     </placetobe-card>
 
   </template>
@@ -82,16 +108,71 @@ Placetobe element for composing a message
         messagePlaceholder: {
           type: String                    
         },
+        /**
+        *  Id String of campaign
+        */
+        campaignId: {
+          type: String
+        },            
+        /**
+        * The Server side API endpoint
+        */
+        apiEndpoint: {
+          type: String
+        },
+        /**
+        * The access token (JSON web token) associated with the current user session
+        */      
+        accessToken: {
+          type: String
+        },
+        /**
+        * Number of invoice of investor (investorId) in campaign (campaignId)
+        */
+        invoiceNumber: {
+          type: String
+        },
+        /**
+        * Whether investor wants to stay anonymous or not
+        */
+        anonymous: {
+          type: Boolean
+        },     
+        /**
+        * Id String of logged in User
+        */
+        investorId: {
+          type: String
+        },    
+        /**
+        * Relationship type the investor has with the entepreneur
+        */        
+        relationToEntrepeneur: {
+          type: String
+        },
 
         _emptyMessage: {
           type: Boolean,
           computed: '_computeEmpty(messageString)'
+        },
+
+        _messageSent: {
+          type: Boolean,
+          value: false
         }
       },
+      addInvestorTestimonial: function () {
+        this.$.testimonials.addInvestorTestimonial()
+      },
+
       _computeEmpty: function(value) {
         return (!value || value.length < 1);
       },
 
+      _handleMessageAdditionSuccessful: function () {
+        this.set('cardTitle', "Bedankt!")
+        this.set('_messageSent', true)
+      }
     });
   </script>
 </dom-module>

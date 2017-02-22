@@ -6,13 +6,14 @@
     "polymer": "Polymer/polymer#^1.4.0",
     "placetobe-textarea-box": "Placetobe/placetobe-textarea-box",
     "placetobe-button": "Placetobe/placetobe-button",
-    "placetobe-card": "Placetobe/placetobe-card",
-    "placetobe-styles": "Placetobe/placetobe-styles"
+    "placetobe-styles": "Placetobe/placetobe-styles",
+    "caas-campaign-testimonials": "caaSElements/caas-campaign-testimonials"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
     "web-component-tester": "^4.0.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
+    "caas-auth": "CaaSElements/caas-auth"
   }
 }
