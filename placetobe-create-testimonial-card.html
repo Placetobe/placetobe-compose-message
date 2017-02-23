@@ -35,7 +35,7 @@ Placetobe element for creating a testimonial
       investor-id="[[investorId]]"
       invoice-number="[[invoiceNumber]]"
       relation-to-entrepeneur="[[relationToEntrepeneur]]"
-      anonymous="false"
+      anonymous="[[showMessageOnCampaignPage]]"
       api-endpoint="[[apiEndpoint]]"
       access-token="[[accessToken]]"
       motivational-message="[[messageString]]"
@@ -46,6 +46,7 @@ Placetobe element for creating a testimonial
       <template is="dom-if" if="{{!_messageSent}}">
         <article slot="main">
           <placetobe-textarea-box name="[[messageLabel]]" placeholder="[[messagePlaceholder]]" value="{{messageString}}" max-rows="[[maxRows]]"></placetobe-textarea-box>
+          <input type="checkbox" name="anonymous" checked="{{showMessageOnCampaignPage::change}}"><small>Toon bericht op campagnepagina</small>
         </article>
         <placetobe-button
           title="[[buttonTitle]]"
@@ -135,8 +136,9 @@ Placetobe element for creating a testimonial
         /**
         * Whether investor wants to stay anonymous or not
         */
-        anonymous: {
-          type: Boolean
+        showMessageOnCampaignPage: {
+          type: Boolean,
+          value: false
         },     
         /**
         * Id String of logged in User
