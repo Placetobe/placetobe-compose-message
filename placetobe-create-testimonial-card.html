@@ -35,7 +35,7 @@ Placetobe element for creating a testimonial
       investor-id="[[investorId]]"
       invoice-number="[[invoiceNumber]]"
       relation-to-entrepeneur="[[relationToEntrepeneur]]"
-      anonymous="[[showMessageOnCampaignPage]]"
+      anonymous="[[_returnOppositeValue(showMessageOnCampaignPage)]]"
       api-endpoint="[[apiEndpoint]]"
       access-token="[[accessToken]]"
       motivational-message="[[messageString]]"
@@ -46,7 +46,7 @@ Placetobe element for creating a testimonial
       <template is="dom-if" if="{{!_messageSent}}">
         <article slot="main">
           <placetobe-textarea-box name="[[messageLabel]]" placeholder="[[messagePlaceholder]]" value="{{messageString}}" max-rows="[[maxRows]]"></placetobe-textarea-box>
-          <input type="checkbox" name="anonymous" checked="{{showMessageOnCampaignPage::change}}"><small>Toon bericht op campagnepagina</small>
+          <input type="checkbox" name="show-message-checkbox" checked="{{showMessageOnCampaignPage::change}}"><small>Toon bericht op campagnepagina</small>
         </article>
         <placetobe-button
           title="[[buttonTitle]]"
@@ -58,8 +58,8 @@ Placetobe element for creating a testimonial
       </template>
       <template is="dom-if" if="{{_messageSent}}">
         <article slot="main">
-          <p hidden$="{{!anonymous}}">Je bericht is op de pagina van de campagne te zien!</p>
-          <p hidden$="{{anonymous}}">Je bericht is alleen voor de ondernemer te zien</p>
+          <p hidden$="{{!showMessageOnCampaignPage}}">Je bericht is op de pagina van de campagne te zien!</p>
+          <p hidden$="{{showMessageOnCampaignPage}}">Je bericht is alleen voor de ondernemer te zien</p>
         </article>
       </template>
     </placetobe-card>
@@ -174,6 +174,10 @@ Placetobe element for creating a testimonial
       _handleMessageAdditionSuccessful: function () {
         this.set('cardTitle', "Bedankt!")
         this.set('_messageSent', true)
+      },
+
+      _returnOppositeValue: function (value) {
+        return !value
       }
     });
   </script>
