@@ -19,6 +19,7 @@ Placetobe element for creating a testimonial
         display: block;
       }
       placetobe-textarea-box {
+        padding-top: 8px;
         --iron-autogrow-textarea-height: {
           height: 100px;
         }        
@@ -28,6 +29,9 @@ Placetobe element for creating a testimonial
       }
       [hidden] {
         display: none;
+      }
+      #input-checkbox-text { 
+        padding-top: 8px;
       }
       
     </style>
@@ -49,7 +53,9 @@ Placetobe element for creating a testimonial
       <template is="dom-if" if="{{!_messageSent}}">
         <article slot="main">
           <placetobe-textarea-box name="[[messageLabel]]" placeholder="[[messagePlaceholder]]" value="{{messageString}}" max-rows="[[maxRows]]"></placetobe-textarea-box>
-          <input type="checkbox" name="show-message-checkbox" checked="{{showMessageOnCampaignPage::change}}"><small>Toon bericht op campagnepagina</small>
+          <div id="input-checkbox-text">
+            <input type="checkbox" name="show-message-checkbox" checked="{{showMessageOnCampaignPage::change}}"><small>Toon bericht op campagnepagina</small>
+          </div>
         </article>
         <placetobe-button
           title="[[buttonTitle]]"
