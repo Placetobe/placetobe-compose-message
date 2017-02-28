@@ -45,23 +45,28 @@ Placetobe element for creating a testimonial
       on-campaign-testimonial-created="_handleMessageAdditionSuccessful"
     ></caas-campaign-testimonials>
 
-    <placetobe-card title="[[cardTitle]]">
-      <template is="dom-if" if="{{!_messageSent}}">
+    <placetobe-card title="[[_cardTitle]]">
+      <template is="dom-if" if="[[!_messageSent]]">
         <article slot="main">
-          <placetobe-textarea-box name="[[messageLabel]]" placeholder="[[messagePlaceholder]]" value="{{motivationalMessage}}" max-rows="[[maxRows]]"></placetobe-textarea-box>
+          <placetobe-textarea-box
+            name="Typ een bericht..."
+            placeholder="Typ een bericht..."
+            value="{{motivationalMessage}}"
+            max-rows="6"
+          ></placetobe-textarea-box>
           <label id="input-checkbox-text">
             <input type="checkbox" name="show-message-checkbox" checked="{{showMessageOnCampaignPage::change}}"><small>Toon mijn naam en bericht op de campagnepagina</small>
           </label>
         </article>
         <placetobe-button
-          title="[[buttonTitle]]"
+          title="Stuur bericht"
           slot="footer"
           disabled$="[[_emptyMessage]]"
           on-tap="addInvestorTestimonial"
-        ><span>[[buttonTitle]]</span>
+        ><span>Stuur bericht</span>
         </placetobe-button>
       </template>
-      <template is="dom-if" if="{{_messageSent}}">
+      <template is="dom-if" if="[[_messageSent]]">
         <article slot="main">
           <p hidden$="{{!showMessageOnCampaignPage}}">Je bericht wordt nu zichtbaar op de campagnepagina.</p>
           <p hidden$="{{showMessageOnCampaignPage}}">Je bericht is alleen voor de ondernemer te zien.</p>
@@ -82,37 +87,6 @@ Placetobe element for creating a testimonial
         motivationalMessage: {
           type: String,
           notify: true
-        },
-        /**
-         * String displayed at the top of the card
-        */ 
-        cardTitle: {
-          type: String
-        },
-        /**
-         * String displayed in the button
-        */        
-        buttonTitle: {
-          type: String
-        },
-        /**
-         * Maximum amount of rows to be displayed at a time. Scrollbar will appear if amount of total rows increases this value.
-         * Note: When users never hit `enter` (characterCode == 13) the textarea might grow bigger due to a bug.
-        */
-        maxRows: {
-          type: Number
-        },
-        /**
-         * Label on top of textfield reminder user what to write about
-        */
-        messageLabel: {
-          type: String          
-        },
-        /**
-         * Message to be displayed when user has not written anything yet
-        */
-        messagePlaceholder: {
-          type: String                    
         },
         /**
         *  Id String of campaign
@@ -143,7 +117,8 @@ Placetobe element for creating a testimonial
         */
         showMessageOnCampaignPage: {
           type: Boolean,
-          value: false
+          value: false,
+          notify: true
         },     
         /**
         * Id String of logged in User
@@ -156,7 +131,16 @@ Placetobe element for creating a testimonial
         */        
         relationToEntrepreneur: {
           type: String,
-          value: 'unknown'
+          value: 'unknown',
+          notify: true
+        },
+
+        /**
+         * String displayed at the top of the card
+        */ 
+        _cardTitle: {
+          type: String,
+          value: 'Stuur de ondernemer een bericht'
         },
 
         _emptyMessage: {
@@ -178,7 +162,7 @@ Placetobe element for creating a testimonial
       },
 
       _handleMessageAdditionSuccessful: function () {
-        this.set('cardTitle', "Bedankt!")
+        this.set('_cardTitle', "Bedankt!")
         this.set('_messageSent', true)
       },
 
