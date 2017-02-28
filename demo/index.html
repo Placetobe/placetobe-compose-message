@@ -27,7 +27,6 @@
 
         <template is="dom-bind" id="demo">
 
-
           <h2>Sign in</h2>
 
           <template is="dom-if" if="[[!signedIn]]">
@@ -39,11 +38,6 @@
               <input type="submit" value="Sign In">
             </form>
           </template>
-            
-          <template is="dom-if" if="[[signedIn]]">
-            <label for="token">signed in</label><br>
-            <small>[[accessToken]]</small>
-          </template>
 
           <caas-auth
             id="auth"
@@ -53,23 +47,28 @@
             user-id="{{userId}}"
           ></caas-auth>
 
-          <placetobe-create-testimonial-card
-            button-title="Stuur bericht"
-            card-title="Stuur de ondernemer een bericht"
-            max-rows="6"
-            message-label="Schrijf een bedankje"
-            placeholder="Schrijf een bedankje"
-            campaign-id="749"
-            investor-id="[[userId]]"
-            invoice-number="555"
-            relation-to-entrepeneur="unknown"
-            anonymous= "false"
-            api-endpoint="http://canapi.local"
-            testimonials="{{testimonials}}"
-            access-token="[[accessToken]]"
-            motivational-message="Zet m op! Test!"
-          ></placetobe-create-testimonial-card>
+          <template is="dom-if" if="[[signedIn]]">
+            <label for="token">signed in</label><br>
+            <small>[[accessToken]]</small>
 
+            <placetobe-create-testimonial-card
+              button-title="Stuur bericht"
+              card-title="Stuur de ondernemer een bericht"
+              max-rows="6"
+              message-label="Schrijf een bedankje"
+              placeholder="Schrijf een bedankje"
+              campaign-id="749"
+              investor-id="[[userId]]"
+              invoice-number="555"
+              relation-to-entrepeneur="unknown"
+              anonymous= "false"
+              api-endpoint="http://canapi.local"
+              testimonials="{{testimonials}}"
+              access-token="[[accessToken]]"
+              motivational-message="Zet m op! Test!"
+            ></placetobe-create-testimonial-card>
+
+          </template>
 
           <script>
             var d = document.querySelector('#demo');

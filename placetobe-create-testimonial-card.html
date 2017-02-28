@@ -40,22 +40,18 @@ Placetobe element for creating a testimonial
       id="testimonials"
       campaign-id="[[campaignId]]"
       investor-id="[[investorId]]"
-      invoice-number="[[invoiceNumber]]"
-      relation-to-entrepeneur="[[relationToEntrepeneur]]"
-      anonymous="[[_returnOppositeValue(showMessageOnCampaignPage)]]"
       api-endpoint="[[apiEndpoint]]"
       access-token="[[accessToken]]"
-      motivational-message="[[messageString]]"
       on-campaign-testimonial-created="_handleMessageAdditionSuccessful"
     ></caas-campaign-testimonials>
 
     <placetobe-card title="[[cardTitle]]">
       <template is="dom-if" if="{{!_messageSent}}">
         <article slot="main">
-          <placetobe-textarea-box name="[[messageLabel]]" placeholder="[[messagePlaceholder]]" value="{{messageString}}" max-rows="[[maxRows]]"></placetobe-textarea-box>
-          <div id="input-checkbox-text">
-            <input type="checkbox" name="show-message-checkbox" checked="{{showMessageOnCampaignPage::change}}"><small>Toon bericht op campagnepagina</small>
-          </div>
+          <placetobe-textarea-box name="[[messageLabel]]" placeholder="[[messagePlaceholder]]" value="{{motivationalMessage}}" max-rows="[[maxRows]]"></placetobe-textarea-box>
+          <label id="input-checkbox-text">
+            <input type="checkbox" name="show-message-checkbox" checked="{{showMessageOnCampaignPage::change}}"><small>Toon mijn naam en bericht op de campagnepagina</small>
+          </label>
         </article>
         <placetobe-button
           title="[[buttonTitle]]"
@@ -67,8 +63,8 @@ Placetobe element for creating a testimonial
       </template>
       <template is="dom-if" if="{{_messageSent}}">
         <article slot="main">
-          <p hidden$="{{!showMessageOnCampaignPage}}">Je bericht is op de pagina van de campagne te zien!</p>
-          <p hidden$="{{showMessageOnCampaignPage}}">Je bericht is alleen voor de ondernemer te zien</p>
+          <p hidden$="{{!showMessageOnCampaignPage}}">Je bericht wordt nu zichtbaar op de campagnepagina.</p>
+          <p hidden$="{{showMessageOnCampaignPage}}">Je bericht is alleen voor de ondernemer te zien.</p>
         </article>
       </template>
     </placetobe-card>
@@ -83,7 +79,7 @@ Placetobe element for creating a testimonial
         /**
          * Message (String) entered by user
         */ 
-        messageString: {
+        motivationalMessage: {
           type: String,
           notify: true
         },
@@ -158,13 +154,14 @@ Placetobe element for creating a testimonial
         /**
         * Relationship type the investor has with the entepreneur
         */        
-        relationToEntrepeneur: {
-          type: String
+        relationToEntrepreneur: {
+          type: String,
+          value: 'unknown'
         },
 
         _emptyMessage: {
           type: Boolean,
-          computed: '_computeEmpty(messageString)'
+          computed: '_computeEmpty(motivationalMessage)'
         },
 
         _messageSent: {
@@ -173,7 +170,7 @@ Placetobe element for creating a testimonial
         }
       },
       addInvestorTestimonial: function () {
-        this.$.testimonials.addInvestorTestimonial()
+        this.$.testimonials.addItem(this.invoiceNumber, this.relationToEntrepreneur, !this.showMessageOnCampaignPage, this.motivationalMessage)
       },
 
       _computeEmpty: function(value) {
