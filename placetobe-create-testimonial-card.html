@@ -61,7 +61,7 @@ Placetobe element for creating a testimonial
         <placetobe-button
           title="Stuur bericht"
           slot="footer"
-          disabled$="[[_emptyMessage]]"
+          disabled$="[[!motivationalMessage]]"
           on-tap="addInvestorTestimonial"
         ><span>Stuur bericht</span>
         </placetobe-button>
@@ -143,11 +143,6 @@ Placetobe element for creating a testimonial
           value: 'Stuur de ondernemer een bericht'
         },
 
-        _emptyMessage: {
-          type: Boolean,
-          computed: '_computeEmpty(motivationalMessage)'
-        },
-
         _messageSent: {
           type: Boolean,
           value: false
@@ -155,10 +150,6 @@ Placetobe element for creating a testimonial
       },
       addInvestorTestimonial: function () {
         this.$.testimonials.addItem(this.invoiceNumber, this.relationToEntrepreneur, !this.showMessageOnCampaignPage, this.motivationalMessage)
-      },
-
-      _computeEmpty: function(value) {
-        return (!value || value.length < 1);
       },
 
       _handleMessageAdditionSuccessful: function () {
