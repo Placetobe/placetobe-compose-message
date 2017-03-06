@@ -41,7 +41,6 @@ Placetobe element for creating a testimonial
       campaign-id="[[campaignId]]"
       investor-id="{{investorId}}"
       api-endpoint="[[apiEndpoint]]"
-      access-token="[[accessToken]]"
       on-campaign-testimonial-created="_handleMessageAdditionSuccessful"
     ></caas-campaign-testimonials>
 
@@ -100,12 +99,6 @@ Placetobe element for creating a testimonial
         * The Server side API endpoint
         */
         apiEndpoint: {
-          type: String
-        },
-        /**
-        * The access token (JSON web token) associated with the current user session
-        */      
-        accessToken: {
           type: String
         },
         /**
