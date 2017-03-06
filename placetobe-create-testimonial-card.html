@@ -48,24 +48,27 @@ Placetobe element for creating a testimonial
 
     <placetobe-card title="[[_cardTitle]]">
       <template is="dom-if" if="[[!_messageSent]]">
-        <article slot="main">
-          <placetobe-textarea-box
-            name="Typ een bericht..."
-            placeholder="Typ een bericht..."
-            value="{{motivationalMessage}}"
-            max-rows="6"
-          ></placetobe-textarea-box>
-          <label id="input-checkbox-text">
-            <input type="checkbox" name="show-message-checkbox" checked="{{showMessageOnCampaignPage::change}}"><small>Toon mijn naam en bericht op de campagnepagina</small>
-          </label>
-        </article>
-        <placetobe-button
-          title="Stuur bericht"
-          slot="footer"
-          disabled$="[[!motivationalMessage]]"
-          on-tap="addInvestorTestimonial"
-        ><span>Stuur bericht</span>
-        </placetobe-button>
+        <template is="dom-if" if="[[investorId]]">
+          <article slot="main">
+            <placetobe-textarea-box
+              name="Typ een bericht..."
+              placeholder="Typ een bericht..."
+              value="{{motivationalMessage}}"
+              max-rows="6"
+            ></placetobe-textarea-box>
+            <label id="input-checkbox-text">
+              <input type="checkbox" name="show-message-checkbox" checked="{{showMessageOnCampaignPage::change}}"><small>Toon mijn naam en bericht op de campagnepagina</small>
+            </label>
+          </article>
+          <placetobe-button
+            title="Stuur bericht"
+            slot="footer"
+            disabled$="[[!motivationalMessage]]"
+            on-tap="addInvestorTestimonial"
+          ><span>Stuur bericht</span>
+          </placetobe-button>
+        </template>
+        <p hidden$="[[investorId]]">Log in om de ondernemer een bericht te sturen.</p>      
       </template>
       <template is="dom-if" if="[[_messageSent]]">
         <article slot="main">
