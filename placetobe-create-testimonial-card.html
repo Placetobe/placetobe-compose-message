@@ -39,32 +39,34 @@ Placetobe element for creating a testimonial
     <caas-campaign-testimonials
       id="testimonials"
       campaign-id="[[campaignId]]"
-      investor-id="[[investorId]]"
+      investor-id="{{investorId}}"
       api-endpoint="[[apiEndpoint]]"
-      access-token="[[accessToken]]"
       on-campaign-testimonial-created="_handleMessageAdditionSuccessful"
     ></caas-campaign-testimonials>
 
     <placetobe-card title="[[_cardTitle]]">
       <template is="dom-if" if="[[!_messageSent]]">
-        <article slot="main">
-          <placetobe-textarea-box
-            name="Typ een bericht..."
-            placeholder="Typ een bericht..."
-            value="{{motivationalMessage}}"
-            max-rows="6"
-          ></placetobe-textarea-box>
-          <label id="input-checkbox-text">
-            <input type="checkbox" name="show-message-checkbox" checked="{{showMessageOnCampaignPage::change}}"><small>Toon mijn naam en bericht op de campagnepagina</small>
-          </label>
-        </article>
-        <placetobe-button
-          title="Stuur bericht"
-          slot="footer"
-          disabled$="[[!motivationalMessage]]"
-          on-tap="addInvestorTestimonial"
-        ><span>Stuur bericht</span>
-        </placetobe-button>
+        <template is="dom-if" if="[[investorId]]">
+          <article slot="main">
+            <placetobe-textarea-box
+              name="Typ een bericht..."
+              placeholder="Typ een bericht..."
+              value="{{motivationalMessage}}"
+              max-rows="6"
+            ></placetobe-textarea-box>
+            <label id="input-checkbox-text">
+              <input type="checkbox" name="show-message-checkbox" checked="{{showMessageOnCampaignPage::change}}"><small>Toon mijn naam en bericht op de campagnepagina</small>
+            </label>
+          </article>
+          <placetobe-button
+            title="Stuur bericht"
+            slot="footer"
+            disabled$="[[!motivationalMessage]]"
+            on-tap="addInvestorTestimonial"
+          ><span>Stuur bericht</span>
+          </placetobe-button>
+        </template>
+        <p hidden$="[[investorId]]">Log in om de ondernemer een bericht te sturen.</p>      
       </template>
       <template is="dom-if" if="[[_messageSent]]">
         <article slot="main">
@@ -79,7 +81,6 @@ Placetobe element for creating a testimonial
     Polymer({
 
       is: 'placetobe-create-testimonial-card',
-
       properties: {
         /**
          * Message (String) entered by user
@@ -98,12 +99,6 @@ Placetobe element for creating a testimonial
         * The Server side API endpoint
         */
         apiEndpoint: {
-          type: String
-        },
-        /**
-        * The access token (JSON web token) associated with the current user session
-        */      
-        accessToken: {
           type: String
         },
         /**
